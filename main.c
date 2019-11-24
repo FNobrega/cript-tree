@@ -56,17 +56,19 @@ int main()
 	//==================================================================================
 	//Arvore B
 	TAB * arvore = Inicializa();
-	printf("flag 101\n");
+	printf("flag: 101\n");
 	int tam = strlen(letras);
 	for (int i = 0; i <tam; ++i)
 	{
 		arvore = Insere(arvore, letras[i], t);
 	}
-	printf("flag 102\n");
+	printf("flag: 102\n");
 	Imprime(arvore, 0);
-	printf("flag103\n");
+	printf("flag: 103\n");
 	ImprimeInt(arvore, 0);
-
+	printf("flag: 104\n");
+	//char *letraEnc = BuscaCaminho(arvore, 'v');
+	//printf("%s\n", letraEnc);
 
 	return 0;
 }

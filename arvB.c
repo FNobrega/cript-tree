@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 const int t = 2;
 
@@ -71,6 +72,33 @@ TAB *Busca(TAB* x, int ch){
   return Busca(x->filho[i], ch);
 }
 
+char *BuscaCaminho(TAB* x, char ch){ 
+  char src[] = "0";
+  char resp[] = "0";
+  if(!x) {
+    printf("flag: 201\n");
+    return resp;
+  }
+  int i = 0;
+  while(i < x->nchaves && ch > x->chave[i]) i++;
+  if(i < x->nchaves && ch == x->chave[i]) {
+        printf("flag: 202\n");
+        src[0] = i+'0';
+        printf("%i\n",i );
+
+        return src;
+    }
+  if(x->folha) {
+    printf("flag: 203\n");
+    return src[0] = i+'0';
+  }
+  src[0] = i+'0';
+  //printf("%s\n", strcat(src,src));
+  strcat(src,BuscaCaminho(x->filho[i], ch));
+  printf("flag: 204\n");
+  printf("%s\n", src);
+  return src;
+}
 
 TAB *Inicializa(){
   return NULL;
