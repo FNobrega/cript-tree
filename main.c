@@ -56,19 +56,27 @@ int main()
 	//==================================================================================
 	//Arvore B
 	TAB * arvore = Inicializa();
-	printf("flag: 101\n");
+	//printf("flag: 101\n");
 	int tam = strlen(letras);
 	for (int i = 0; i <tam; ++i)
 	{
-		arvore = Insere(arvore, letras[i], t);
+		arvore = Insere(arvore, ordenado[i], t);
 	}
-	printf("flag: 102\n");
+	//printf("flag: 102\n");
 	Imprime(arvore, 0);
-	printf("flag: 103\n");
-	ImprimeInt(arvore, 0);
-	printf("flag: 104\n");
-	//char *letraEnc = BuscaCaminho(arvore, 'v');
-	//printf("%s\n", letraEnc);
+	//printf("flag: 103\n");
+	//ImprimeInt(arvore, 0);
+	//printf("flag: 104\n");
+	char* letraEnc = malloc(sizeof(char*)*1000);
+	strcpy(letraEnc, "\0");
+	for(int i=0; i<strlen(string_copia); i++){
+		if(string_copia[i]== ' '){
+			strcat(letraEnc, " ");
+		}
+		else BuscaCaminho(arvore, string_copia[i], letraEnc);
+	}
+	printf("caminho: %s\n", letraEnc);
+	//ImprimeInt(Busca(arvore, 'e'),0);
 
 	return 0;
 }

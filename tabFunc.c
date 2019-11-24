@@ -7,13 +7,22 @@ void ordenaLetras(const char str[], char sup[]);
 
 void removeDuplicates(char * str){
     int i = 0;
-
     while(str[i] != '\0')
     {
         /* Remove all duplicate of character string[i] */
         removeAll(str, str[i], i + 1);
         i++;
     }
+    removeEspaco(str);
+}
+
+void removeEspaco(char* s){
+    const char* d = s;
+    do {
+        while (*d == ' ') {
+            ++d;
+        }
+    } while (*s++ = *d++);
 }
 
 void removeAll(char * str, const char toRemove, int index){

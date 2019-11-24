@@ -14,7 +14,7 @@ typedef struct ArvB{
 TAB *Cria(int t){
   TAB* novo = (TAB*)malloc(sizeof(TAB));
   novo->nchaves = 0;
-  novo->chave =(int*)malloc(sizeof(int*)*((t*2)-1));
+  novo->chave =(char*)malloc(sizeof(char*)*((t*2)-1));
   novo->folha=1;
   novo->filho = (TAB**)malloc(sizeof(TAB*)*t*2);
   int i;
@@ -72,33 +72,47 @@ TAB *Busca(TAB* x, int ch){
   return Busca(x->filho[i], ch);
 }
 
-char *BuscaCaminho(TAB* x, char ch){ 
-  char src[] = "0";
-  char resp[] = "0";
-  if(!x) {
-    printf("flag: 201\n");
-    return resp;
-  }
-  int i = 0;
-  while(i < x->nchaves && ch > x->chave[i]) i++;
-  if(i < x->nchaves && ch == x->chave[i]) {
-        printf("flag: 202\n");
-        src[0] = i+'0';
-        printf("%i\n",i );
+void BuscaCaminho(TAB* x, char ch, char* letra){
+  //printf("%s", letra);
+  char temp[]="\0";
 
-        return src;
-    }
-  if(x->folha) {
-    printf("flag: 203\n");
-    return src[0] = i+'0';
+
+  if(!x){
+    //caso em que a árvore é vazia
+    //printf("flag: 201\n");
+    return;
   }
-  src[0] = i+'0';
-  //printf("%s\n", strcat(src,src));
-  strcat(src,BuscaCaminho(x->filho[i], ch));
-  printf("flag: 204\n");
-  printf("%s\n", src);
-  return src;
+
+  int i = 0;
+  while(i< x->nchaves && ch> x->chave[i]) i++;
+  if(i<x->nchaves && ch==x->chave[i]){
+    //printf("flag 202\n");
+    snprintf(temp, 10,"%d", i);
+    strcat(letra, temp);
+  }
+
+  //if(x->folha && i> x->nchaves && !(i<x->nchaves && ch==x->chave[i]))
+    //printf("flag: 205\n");
+
+  //if(x->folha && !(i<x->nchaves && ch==x->chave[i])) {
+    //printf("flag: 203\n");
+    //printf("%s\n", x->chave);
+    //snprintf(temp, 10,"%d", i);
+    //strcat(letra, temp);
+  //}
+  if((i>x->nchaves && ch!=x->chave[i])|| (!x->folha && ch!=x->chave[i])) {
+      snprintf(temp, 10,"%d", i);
+      strcat(letra, temp);
+      BuscaCaminho(x->filho[i], ch, letra);
+      //printf("flag 204");
+    } else {
+        if(!x->folha){
+            strcat(letra, "*");
+            BuscaCaminho(x->filho[i], ch, letra);
+        }
+    }
 }
+
 
 TAB *Inicializa(){
   return NULL;
