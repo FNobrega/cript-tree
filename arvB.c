@@ -91,31 +91,70 @@ void BuscaCaminho(TAB* x, char ch, char* letra){
     strcat(letra, temp);
   }
 
-  //if(x->folha && i> x->nchaves && !(i<x->nchaves && ch==x->chave[i]))
-    //printf("flag: 205\n");
-
-  //if(x->folha && !(i<x->nchaves && ch==x->chave[i])) {
-    //printf("flag: 203\n");
-    //printf("%s\n", x->chave);
-    //snprintf(temp, 10,"%d", i);
-    //strcat(letra, temp);
-  //}
   if((i>x->nchaves && ch!=x->chave[i])|| (!x->folha && ch!=x->chave[i])) {
       snprintf(temp, 10,"%d", i);
       strcat(letra, temp);
       BuscaCaminho(x->filho[i], ch, letra);
       //printf("flag 204");
     } else {
-        if(!x->folha){
+        //if(!x->folha){
             strcat(letra, "*");
             BuscaCaminho(x->filho[i], ch, letra);
-        }
+        //}
     }
 }
+void removeAsterisco(char* s){
+    const char* d = s;
+    do {
+        while (*d == '*') {
+            ++d;
+        }
+    } while (*s++ = *d++);
 
+}
+char BuscaLetra(TAB* x, char* palavra){
+    //printf("%s", palavra);
+    int j;
+    j = palavra[0] - '0';
+    if (palavra[1]!='\0' && palavra[1]){
+        //printf("%i\n", j);
+        //printf("%c\n", palavra[0]);
+        palavra++;
+        BuscaLetra(x->filho[j],palavra);
+    }else{
+        return x->chave[j];
+    }
+  }
+
+void tamanhoLetra(TAB* x, int* i){
+  if(x){
+    while(!x->folha){
+      x = x->filho[0];
+      ++(*i);
+  }
+}
+++(*i);
+}
 
 TAB *Inicializa(){
   return NULL;
+}
+
+void decript (TAB* a, int size, char *texto){
+    char temp[size];
+    int i=0;
+    for (int i = 0; i < size; ++i)
+    {
+        temp[i] = texto[i];
+    }
+  /*  for (int i = 0; i < size; ++i)
+    {
+        if(temp[i] == '*')
+            temp[i] = '\0';
+    }*/
+    //printf("%s\n", temp);
+
+
 }
 
 

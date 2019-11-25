@@ -4,6 +4,7 @@
 #include <string.h>
 #include "arvB.c"
 #include "tabFunc.c"
+#include "decripta.c"
 
 #define MAX_TAM 60
 
@@ -15,6 +16,11 @@ int main()
     char string_copia[MAX_TAM];
     int frequencia[MAX_TAM]= {0};
     char ordenado[MAX_TAM];
+
+    int tamletra=0;
+
+	char delim[] = "*";
+	//char decode[MAX_TAM];
 
     //==================================================================================
 	// Abertura de arquivo
@@ -77,6 +83,45 @@ int main()
 	}
 	printf("caminho: %s\n", letraEnc);
 	//ImprimeInt(Busca(arvore, 'e'),0);
+	//BuscaCaminho(arvore, string_copia[i], letraEnc);
+	tamanhoLetra(arvore, &tamletra);
+	printf("%i\n", tamletra );
+
+	//printf(	"%c\n", BuscaLetra(arvore, "20"));
+
+	decript(arvore,tamletra,letraEnc);
+	char *ptr = strtok(letraEnc, delim);
+	int init_size = strlen(letraEnc);
+	//int cont =0;
+	while(ptr != NULL)
+	{
+		if (ptr[0] == ' '){
+			//printf("%s\n", ptr);
+			//decode[cont] = ' ';
+			//decode[cont+1] = BuscaLetra(arvore,++ptr);
+			//decode[cont+2] = '\0';
+			//cont = cont +2;
+			printf(" %c", BuscaLetra(arvore,++ptr));
+		} else {
+			//printf("Aqui!\n");
+			//decode[cont] = BuscaLetra(arvore,ptr);
+			//decode[cont+1] = '\0';
+			//printf("%s\n", ptr);
+			printf("%c", BuscaLetra(arvore,ptr));
+			//cont++;
+		}
+		
+		ptr = strtok(NULL, delim);
+	}
+	//printf("%s\n", decode);
+	/*for (int i = 0; i < init_size; i++)
+	{
+		//snprintf(temp, 10,"%d", i);
+    	//strcat(letra, temp);
+		//printf("%c", letraEnc[i]); /* Convert the character to integer, in this case
+							   //the character's ASCII equivalent */
+	//}*/
+	printf("\n");
 
 	return 0;
 }
